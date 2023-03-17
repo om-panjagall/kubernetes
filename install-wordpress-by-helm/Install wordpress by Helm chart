@@ -1,0 +1,38 @@
+# Steps to install wordpress website by Helm Chart
+======================================================
+
+1. Install Helm if not installed 
+a. For Mac
+brew install helm
+
+b. For Windows
+
+From Chocolatey
+choco install kubernetes-helm
+
+From Scoop
+scoop install helm
+
+c. For Debian/Ubuntu
+
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+
+2. Download wordpress repo
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+3. Create namespace as wordpress
+kubectl create namespace wordpress
+
+3. Install wordpress under wordpress namespace
+helm install my-release bitnami/wordpress --namespace wordpress
+
+4. Check resources created by Helm chart
+kubectl get all --namespace wordpress
+
+
+
+
